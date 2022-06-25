@@ -3,17 +3,18 @@
 **Scrapes Used Sailboat Listings From https://www.sailboatlistings.com**
 
 Features include.
-\begin{itemize}
-  \item Length
-  \item Beam
-  \item Draft
-  \item Year Manufactured
-  \item Hull Type
-  \item Material Type
-  \item No. Engines
-  \item Posting Date
-  \item Adjusted Asking Price
-\end{itemize}
+
+markup: \begin{itemize}
+          \item Length
+          \item Beam
+          \item Draft
+          \item Year Manufactured
+          \item Hull Type
+          \item Material Type
+          \item No. Engines
+          \item Posting Date
+          \item Adjusted Asking Price
+        \end{itemize}
 
 The adjusted asking price uses the cpi library to reflect the true asking price
 at the time the listing was made. The earliest listings observed are from 2010.
