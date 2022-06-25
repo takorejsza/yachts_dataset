@@ -4,17 +4,15 @@
 
 Features include.
 
-Markup: \begin{itemize}
-          \item Length
-          \item Beam
-          \item Draft
-          \item Year Manufactured
-          \item Hull Type
-          \item Material Type
-          \item No. Engines
-          \item Posting Date
-          \item Adjusted Asking Price
-        \end{itemize}
+    * Length
+    * Beam
+    * Draft
+    * Year Manufactured
+    * Hull Type
+    * Material Type
+    * No. Engines
+    * Posting Date
+    * Adjusted Asking Price
 
 The adjusted asking price uses the cpi library to reflect the true asking price
 at the time the listing was made. The earliest listings observed are from 2010.
