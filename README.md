@@ -4,7 +4,7 @@
 
 Features include.
 
-markup: \begin{itemize}
+Markup: \begin{itemize}
           \item Length
           \item Beam
           \item Draft
