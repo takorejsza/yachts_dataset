@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 # Author: Thomas Korejsza
-# April 6th 2021
+# April 6th 2021 scripts\hyperlinks.py
 
 def hyperlinks():
     homepage = r"https://www.sailboatlistings.com/sailboats_for_sale/"

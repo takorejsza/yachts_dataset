@@ -1,0 +1,77 @@
+schema: '2.0'
+stages:
+  get_webpages:
+    cmd: python scripts/hyperlinks.py intermediates/saved_hyperlinks.txt
+    deps:
+    - path: scripts/hyperlinks.py
+      md5: aa054705a31b4922feeea64d5a4d7e98
+      size: 1721
+    outs:
+    - path: intermediates/saved_hyperlinks.txt
+      md5: a306859dbbcb5f11d1710277a971dbeb
+      size: 18892
+  get_listings:
+    cmd: python scripts/get_yacht_classifieds.py intermediates/saved_hyperlinks.txt
+      intermediates/raw_listings.csv
+    deps:
+    - path: intermediates/saved_hyperlinks.txt
+      md5: a306859dbbcb5f11d1710277a971dbeb
+      size: 18892
+    - path: scripts/get_yacht_classifieds.py
+      md5: d3e6081e9febe610e3c21bc8c0139b6f
+      size: 1961
+    - path: scripts/hyperlinks.py
+      md5: aa054705a31b4922feeea64d5a4d7e98
+      size: 1721
+    outs:
+    - path: intermediates/raw_listings.csv
+      md5: 252f01cc04a701d61c5c3aa01926fce4
+      size: 1689462
+  clean:
+    cmd: python scripts/clean.py intermediates/raw_listings.csv intermediates/listings.csv
+      -dn True
+    deps:
+    - path: intermediates/raw_listings.csv
+      md5: 252f01cc04a701d61c5c3aa01926fce4
+      size: 1689462
+    - path: intermediates/saved_hyperlinks.txt
+      md5: a306859dbbcb5f11d1710277a971dbeb
+      size: 18892
+    - path: scripts/clean.py
+      md5: 5510f97f426550d6f65f91c95bf92699
+      size: 4276
+    - path: scripts/get_yacht_classifieds.py
+      md5: d3e6081e9febe610e3c21bc8c0139b6f
+      size: 1961
+    - path: scripts/hyperlinks.py
+      md5: aa054705a31b4922feeea64d5a4d7e98
+      size: 1721
+    outs:
+    - path: intermediates/listings.csv
+      md5: 102d4fdd1cfe71eb1d83876f1cf965ea
+      size: 1432095
+  remove_outliers:
+    cmd: python scripts/remove_outliers.py intermediates/listings.csv ./data/listings_wo_outliers.csv
+    deps:
+    - path: intermediates/listings.csv
+      md5: 102d4fdd1cfe71eb1d83876f1cf965ea
+      size: 1432095
+    - path: intermediates/raw_listings.csv
+      md5: 252f01cc04a701d61c5c3aa01926fce4
+      size: 1689462
+    - path: intermediates/saved_hyperlinks.txt
+      md5: a306859dbbcb5f11d1710277a971dbeb
+      size: 18892
+    - path: scripts/clean.py
+      md5: 5510f97f426550d6f65f91c95bf92699
+      size: 4276
+    - path: scripts/get_yacht_classifieds.py
+      md5: d3e6081e9febe610e3c21bc8c0139b6f
+      size: 1961
+    - path: scripts/hyperlinks.py
+      md5: aa054705a31b4922feeea64d5a4d7e98
+      size: 1721
+    outs:
+    - path: data/listings_wo_outliers.csv
+      md5: c3541904084e91ffa274cc838b4714ad
+      size: 1106011

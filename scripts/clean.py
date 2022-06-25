@@ -23,7 +23,6 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
     df.columns = [c.strip().replace(':','') for c in df.columns]
 
     "=======QUANTITATIVE VARIABLES======"
-
     df['posted_at'] = pd.to_datetime(df['posted_at'])
     money_func = lambda x: float(x.replace('$','').replace(',',''))
     df['Asking'] = df['Asking'].map(money_func)
@@ -95,7 +94,7 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     """=======ADJUST FOR INFLATION======"""
     df['Year_Listed'] = pd.to_datetime(df['posted_at']).dt.year
-    print(type(int(date.today().year)), int(date.today().year))
+    # print(type(int(date.today().year)), int(date.today().year))
     #df['Year'] = df['Year'].astype(int)
     #df = df[(df['Year'] >= 1900)]# & (df['Year'] < int(date.today().year))]
     df = adjust_for_inflation(df)
@@ -105,11 +104,13 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('input_file', # default='intermediates/raw_listings.csv',
+    parser.add_argument('input_file',
                         help='intermediates/raw_listings.csv')
-    parser.add_argument('output_file', # default='intermediates/listings.csv',
+    parser.add_argument('output_file',
                         help='intermediates/listings.csv')
-    parser.add_argument('drop_null', type=bool, help="Drops null values")
+
+    parser.add_argument('-dn', '--drop_null', default=True,
+                        type=bool, help="Drops null values")
 
     args = parser.parse_args()
     print("Cleaning up listings...")

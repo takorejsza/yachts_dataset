@@ -1,0 +1,36 @@
+stages:
+  get_webpages:
+    cmd: python scripts/hyperlinks.py intermediates/saved_hyperlinks.txt
+    deps:
+    - scripts/hyperlinks.py
+    outs:
+    - intermediates/saved_hyperlinks.txt
+  get_listings:
+    cmd: python scripts/get_yacht_classifieds.py intermediates/saved_hyperlinks.txt intermediates/raw_listings.csv
+    deps:
+      - intermediates/saved_hyperlinks.txt
+      - scripts/hyperlinks.py
+      - scripts/get_yacht_classifieds.py
+    outs:
+      - intermediates/raw_listings.csv
+  clean:
+    cmd: python scripts/clean.py intermediates/raw_listings.csv intermediates/listings.csv -dn True
+    deps:
+      - scripts/clean.py
+      - scripts/get_yacht_classifieds.py
+      - scripts/hyperlinks.py
+      - intermediates/raw_listings.csv
+      - intermediates/saved_hyperlinks.txt
+    outs:
+      - intermediates/listings.csv
+  remove_outliers:
+    cmd: python scripts/remove_outliers.py intermediates/listings.csv ./data/listings_wo_outliers.csv
+    deps:
+      - scripts/clean.py
+      - scripts/get_yacht_classifieds.py
+      - scripts/hyperlinks.py
+      - intermediates/raw_listings.csv
+      - intermediates/saved_hyperlinks.txt
+      - intermediates/listings.csv
+    outs:
+      - data/listings_wo_outliers.csv
