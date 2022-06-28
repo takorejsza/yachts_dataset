@@ -18,8 +18,8 @@ Features include.
     * Date Posted
     * Adjusted Asking Price
 
-The adjusted asking price uses the cpi library to reflect the true asking price
-at the time the listing was made. The earliest listings observed are from 2010.
+The adjusted asking price uses the cpi library to reflect the asking price
+in current day dollars. The earliest listings observed are from 2010.
 
 Once the data is scraped and saved it undergoes a cleaning and processing step.
 
