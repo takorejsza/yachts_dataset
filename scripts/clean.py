@@ -94,9 +94,6 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     """=======ADJUST FOR INFLATION======"""
     df['Year_Listed'] = pd.to_datetime(df['posted_at']).dt.year
-    # print(type(int(date.today().year)), int(date.today().year))
-    #df['Year'] = df['Year'].astype(int)
-    #df = df[(df['Year'] >= 1900)]# & (df['Year'] < int(date.today().year))]
     df = adjust_for_inflation(df)
 
     return df
