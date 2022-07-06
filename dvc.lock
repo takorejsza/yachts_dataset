@@ -5,8 +5,8 @@ stages:
     - python gather-clean-scripts/hyperlinks.py gather-clean-scripts/intermediates/saved_hyperlinks.txt
     deps:
     - path: gather-clean-scripts/hyperlinks.py
-      md5: 429a0f964604537d6645ec95d0ae9264
-      size: 1699
+      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+      size: 1724
     outs:
     - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
@@ -20,14 +20,14 @@ stages:
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
     - path: gather-clean-scripts/hyperlinks.py
-      md5: 429a0f964604537d6645ec95d0ae9264
-      size: 1699
+      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+      size: 1724
     - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
     - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: 1d2096e322ebc54b89f656a71ffa0821
+      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
       size: 1710983
   clean:
     cmd:
@@ -41,18 +41,18 @@ stages:
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
     - path: gather-clean-scripts/hyperlinks.py
-      md5: 429a0f964604537d6645ec95d0ae9264
-      size: 1699
+      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+      size: 1724
     - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: 1d2096e322ebc54b89f656a71ffa0821
+      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
       size: 1710983
     - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
     - path: gather-clean-scripts/intermediates/listings.csv
-      md5: b763889cd920fb050ef3e37771d39f89
-      size: 1446147
+      md5: b4cdf7586271c462815c6111abfbdd42
+      size: 1446209
   remove_outliers:
     cmd:
     - python gather-clean-scripts/remove_outliers.py gather-clean-scripts/intermediates/listings.csv
@@ -65,18 +65,18 @@ stages:
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
     - path: gather-clean-scripts/hyperlinks.py
-      md5: 429a0f964604537d6645ec95d0ae9264
-      size: 1699
+      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+      size: 1724
     - path: gather-clean-scripts/intermediates/listings.csv
-      md5: b763889cd920fb050ef3e37771d39f89
-      size: 1446147
+      md5: b4cdf7586271c462815c6111abfbdd42
+      size: 1446209
     - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: 1d2096e322ebc54b89f656a71ffa0821
+      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
       size: 1710983
     - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
     - path: data/listings_wo_outliers.csv
-      md5: 3f38bfe59c570dedf5b8e47d9faea23e
-      size: 1115739
+      md5: 6f2f273165865c72bf8ddc5890ed3d9b
+      size: 1115759
