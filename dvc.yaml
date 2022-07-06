@@ -1,40 +1,40 @@
 stages:
   get_webpages:
     cmd:
-      - python gather-clean-scripts/hyperlinks.py gather-clean-scripts/intermediates/saved_hyperlinks.txt
+      - python data_wrangling/hyperlinks.py data_wrangling/intermediates/saved_hyperlinks.txt
     deps:
-      - gather-clean-scripts/hyperlinks.py
+      - data_wrangling/hyperlinks.py
     outs:
-      - gather-clean-scripts/intermediates/saved_hyperlinks.txt
+      - data_wrangling/intermediates/saved_hyperlinks.txt
   get_listings:
     cmd:
-      - python gather-clean-scripts/get_yacht_classifieds.py gather-clean-scripts/intermediates/saved_hyperlinks.txt gather-clean-scripts/intermediates/raw_listings.csv
+      - python data_wrangling/get_yacht_classifieds.py data_wrangling/intermediates/saved_hyperlinks.txt data_wrangling/intermediates/raw_listings.csv
     deps:
-      - gather-clean-scripts/intermediates/saved_hyperlinks.txt
-      - gather-clean-scripts/hyperlinks.py
-      - gather-clean-scripts/get_yacht_classifieds.py
+      - data_wrangling/intermediates/saved_hyperlinks.txt
+      - data_wrangling/hyperlinks.py
+      - data_wrangling/get_yacht_classifieds.py
     outs:
-      - gather-clean-scripts/intermediates/raw_listings.csv
+      - data_wrangling/intermediates/raw_listings.csv
   clean:
     cmd:
-      - python gather-clean-scripts/clean.py gather-clean-scripts/intermediates/raw_listings.csv gather-clean-scripts/intermediates/listings.csv -dn True
+      - python data_wrangling/clean.py data_wrangling/intermediates/raw_listings.csv data_wrangling/intermediates/listings.csv -dn True
     deps:
-      - gather-clean-scripts/clean.py
-      - gather-clean-scripts/get_yacht_classifieds.py
-      - gather-clean-scripts/hyperlinks.py
-      - gather-clean-scripts/intermediates/raw_listings.csv
-      - gather-clean-scripts/intermediates/saved_hyperlinks.txt
+      - data_wrangling/clean.py
+      - data_wrangling/get_yacht_classifieds.py
+      - data_wrangling/hyperlinks.py
+      - data_wrangling/intermediates/raw_listings.csv
+      - data_wrangling/intermediates/saved_hyperlinks.txt
     outs:
-      - gather-clean-scripts/intermediates/listings.csv
+      - data_wrangling/intermediates/listings.csv
   remove_outliers:
     cmd:
-      - python gather-clean-scripts/remove_outliers.py gather-clean-scripts/intermediates/listings.csv ./data/listings_wo_outliers.csv
+      - python data_wrangling/remove_outliers.py data_wrangling/intermediates/listings.csv ./data/listings_wo_outliers.csv
     deps:
-      - gather-clean-scripts/clean.py
-      - gather-clean-scripts/get_yacht_classifieds.py
-      - gather-clean-scripts/hyperlinks.py
-      - gather-clean-scripts/intermediates/raw_listings.csv
-      - gather-clean-scripts/intermediates/saved_hyperlinks.txt
-      - gather-clean-scripts/intermediates/listings.csv
+      - data_wrangling/clean.py
+      - data_wrangling/get_yacht_classifieds.py
+      - data_wrangling/hyperlinks.py
+      - data_wrangling/intermediates/raw_listings.csv
+      - data_wrangling/intermediates/saved_hyperlinks.txt
+      - data_wrangling/intermediates/listings.csv
     outs:
       - data/listings_wo_outliers.csv
