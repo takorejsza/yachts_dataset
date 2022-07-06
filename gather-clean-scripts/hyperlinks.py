@@ -7,7 +7,7 @@ import pandas as pd
 import re
 # Author: Thomas Korejsza
 # April 6th 2022
-# update: july 5th 2022
+# Update: july 5th 2022
 
 def hyperlinks():
     homepage = r"https://www.sailboatlistings.com/sailboats_for_sale/"

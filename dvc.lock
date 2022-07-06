@@ -2,81 +2,81 @@ schema: '2.0'
 stages:
   get_webpages:
     cmd:
-    - python gather-clean-scripts/hyperlinks.py gather-clean-scripts/intermediates/saved_hyperlinks.txt
+    - python data_wrangling/hyperlinks.py data_wrangling/intermediates/saved_hyperlinks.txt
     deps:
-    - path: gather-clean-scripts/hyperlinks.py
-      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+    - path: data_wrangling/hyperlinks.py
+      md5: aa3a8bc578323c5f487f2847130af323
       size: 1724
     outs:
-    - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
+    - path: data_wrangling/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
   get_listings:
     cmd:
-    - python gather-clean-scripts/get_yacht_classifieds.py gather-clean-scripts/intermediates/saved_hyperlinks.txt
-      gather-clean-scripts/intermediates/raw_listings.csv
+    - python data_wrangling/get_yacht_classifieds.py data_wrangling/intermediates/saved_hyperlinks.txt
+      data_wrangling/intermediates/raw_listings.csv
     deps:
-    - path: gather-clean-scripts/get_yacht_classifieds.py
+    - path: data_wrangling/get_yacht_classifieds.py
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
-    - path: gather-clean-scripts/hyperlinks.py
-      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+    - path: data_wrangling/hyperlinks.py
+      md5: aa3a8bc578323c5f487f2847130af323
       size: 1724
-    - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
+    - path: data_wrangling/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
-    - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
-      size: 1710983
+    - path: data_wrangling/intermediates/raw_listings.csv
+      md5: 6a683e50c3255a354ce74ac1394409ed
+      size: 1699898
   clean:
     cmd:
-    - python gather-clean-scripts/clean.py gather-clean-scripts/intermediates/raw_listings.csv
-      gather-clean-scripts/intermediates/listings.csv -dn True
+    - python data_wrangling/clean.py data_wrangling/intermediates/raw_listings.csv
+      data_wrangling/intermediates/listings.csv -dn True
     deps:
-    - path: gather-clean-scripts/clean.py
+    - path: data_wrangling/clean.py
       md5: 5510f97f426550d6f65f91c95bf92699
       size: 4276
-    - path: gather-clean-scripts/get_yacht_classifieds.py
+    - path: data_wrangling/get_yacht_classifieds.py
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
-    - path: gather-clean-scripts/hyperlinks.py
-      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+    - path: data_wrangling/hyperlinks.py
+      md5: aa3a8bc578323c5f487f2847130af323
       size: 1724
-    - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
-      size: 1710983
-    - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
+    - path: data_wrangling/intermediates/raw_listings.csv
+      md5: 6a683e50c3255a354ce74ac1394409ed
+      size: 1699898
+    - path: data_wrangling/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
-    - path: gather-clean-scripts/intermediates/listings.csv
-      md5: b4cdf7586271c462815c6111abfbdd42
-      size: 1446209
+    - path: data_wrangling/intermediates/listings.csv
+      md5: 6cb04be42554fd432c5d0b6c89545dcd
+      size: 1436606
   remove_outliers:
     cmd:
-    - python gather-clean-scripts/remove_outliers.py gather-clean-scripts/intermediates/listings.csv
+    - python data_wrangling/remove_outliers.py data_wrangling/intermediates/listings.csv
       ./data/listings_wo_outliers.csv
     deps:
-    - path: gather-clean-scripts/clean.py
+    - path: data_wrangling/clean.py
       md5: 5510f97f426550d6f65f91c95bf92699
       size: 4276
-    - path: gather-clean-scripts/get_yacht_classifieds.py
+    - path: data_wrangling/get_yacht_classifieds.py
       md5: d3e6081e9febe610e3c21bc8c0139b6f
       size: 1961
-    - path: gather-clean-scripts/hyperlinks.py
-      md5: 6b98d7a7db0d4d7cc6ac3b1dc0046c57
+    - path: data_wrangling/hyperlinks.py
+      md5: aa3a8bc578323c5f487f2847130af323
       size: 1724
-    - path: gather-clean-scripts/intermediates/listings.csv
-      md5: b4cdf7586271c462815c6111abfbdd42
-      size: 1446209
-    - path: gather-clean-scripts/intermediates/raw_listings.csv
-      md5: a2d128133e5b4d5a1f66d29b5acbdd5c
-      size: 1710983
-    - path: gather-clean-scripts/intermediates/saved_hyperlinks.txt
+    - path: data_wrangling/intermediates/listings.csv
+      md5: 6cb04be42554fd432c5d0b6c89545dcd
+      size: 1436606
+    - path: data_wrangling/intermediates/raw_listings.csv
+      md5: 6a683e50c3255a354ce74ac1394409ed
+      size: 1699898
+    - path: data_wrangling/intermediates/saved_hyperlinks.txt
       md5: 341c6c44d7acfcf03e542227e7296a28
       size: 18124
     outs:
     - path: data/listings_wo_outliers.csv
-      md5: 6f2f273165865c72bf8ddc5890ed3d9b
-      size: 1115759
+      md5: 2c50051433f21546daf6c98c046e1aa3
+      size: 1109227
