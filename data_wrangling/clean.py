@@ -19,7 +19,7 @@ def adjust_for_inflation(df:pd.DataFrame) -> pd.DataFrame:
     return df
 
 def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
-    df = pd.read_csv(file, usecols=[i for i in range(1,12)])
+    df = pd.read_csv(file, usecols=[i for i in range(1,15)])
     df.columns = [c.strip().replace(':','') for c in df.columns]
 
     "=======QUANTITATIVE VARIABLES======"
@@ -38,12 +38,10 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     """=======DUMMY / CATEGORICAL VARIABLES======"""
 
-    df['Material'],\
-    df['Hull_Type'] = zip(*df["Hull"].\
-                            map(lambda string: tuple(string.split(u'\xa0'))))
-    df['Is_Mono'] = df['Hull_Type'].map(lambda x: 1 if x == 'monohull' else 0)
+    #df['Material'],df['Hull_Type'] = zip(*df["Hull"].map(lambda string: tuple(string.split(u'\xa0'))))
+    df['Is_Mono'] = df['Hull'].map(lambda x: 1 if x == 'monohull' else 0)
 
-    df.drop(columns=["Hull"], inplace=True)
+    #df.drop(columns=["Hull"], inplace=True)
 
     df["Type"] = df["Type"].astype(str)
     design_func = lambda t: 'racer' if re.search('racer',t) else t
@@ -58,6 +56,17 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
     diesel_check = lambda d: 1 if re.search('diesel', d) else 0
     df['Is_Diesel'] = df['Engine'].map(diesel_check)
 
+    df['Is_Cutter'] = df['Rigging'].map(lambda x: 1 if x == 'cutter' else 0)
+    df['Is_Ketch'] = df['Rigging'].map(lambda x: 1 if x == 'ketch' else 0)
+    df['Is_masthead_sloop'] = df['Rigging'].map(lambda x: 1 if x == 'masthead sloop' else 0)
+    df.drop(columns=["Rigging"], inplace=True)
+
+    df['Is_Excellent'] = df['Condition'].map(lambda x: 1 if x == 'excellent' else 0)
+    df['Is_Fair'] = df['Condition'].map(lambda x: 1 if x == 'fair' else 0)
+    df['Is_Good'] = df['Condition'].map(lambda x: 1 if x == 'good' else 0)
+    df['Is_project_boat'] = df['Condition'].map(lambda x: 1 if x == 'project boat' else 0)
+    df.drop(columns=["Condition"], inplace=True)
+
     def motor_type(engine):
         if (engine == None) | (engine == 'nan'):
             return 'motorless'
@@ -71,6 +80,8 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
         else:
             return None
     df['Motor_Type'] = df['Engine'].map(motor_type)
+
+    
 
     """=======ORDINAL ENCODING======"""
 
@@ -105,9 +116,9 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('input_file',
-                        help='intermediates/raw_listings.csv')
+                        help='data_wrangling/intermediates/raw_combined_dataset.csv')
     parser.add_argument('output_file',
-                        help='intermediates/listings.csv')
+                        help='intermediates/combined_dataset.csv')
 
     parser.add_argument('-dn', '--drop_null', default=True,
                         type=bool, help="Drops null values")
