@@ -101,7 +101,6 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     return df
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('input_file',

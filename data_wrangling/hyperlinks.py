@@ -1,10 +1,7 @@
 import os
 import argparse
 import requests
-import bs4
 from bs4 import BeautifulSoup
-import pandas as pd
-import re
 # Author: Thomas Korejsza
 # April 6th 2022
 # Update: july 5th 2022
@@ -40,12 +37,15 @@ def hyperlinks():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('output_file', help="location to save hyperlinks.")
+    parser.add_argument('of', help="location to save hyperlinks.")
     args = parser.parse_args()
 
-    path = os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
-    with open(args.output_file, 'w') as file:
+    if not os.path.isdir(r"data_wrangling/intermediates/"):
+        os.mkdir("data_wrangling/intermediates")
+    
+    path = f"data_wrangling/intermediates/{args.of}"
+    with open(path, 'w') as file:
         print("Writing hyperlinks to file.")
         for page in hyperlinks():
             file.write(page+'\n')
-    print(f"hyperlinks saved to {args.output_file}")
+    print(f"hyperlinks saved to {args.of}")

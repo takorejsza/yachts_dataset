@@ -1,0 +1,55 @@
+{% extends "/base.html" %}
+
+{% block content%}
+<h1>Get Estimate</h1>
+<div cass="container", style="display: flex; height: 100px;">
+    <div syle="width: 50%; background: green;">
+        <form action="" method="post"  novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.year.label }}<br>
+                {{ form.year(size=32) }}
+            </p>
+            <p>
+                {{ form.length.label }}<br>
+                {{ form.length(size=32) }}
+            </p>
+            <p>
+                {{ form.beam.label }}<br>
+                {{ form.beam(size=32) }}
+            </p>
+            <p>
+                {{ form.draft.label }}<br>
+                {{ form.draft(size=32) }}
+            </p>
+            <p>
+                {{ form.no_engines.label }}<br>
+                {{ form.no_engines(size=32) }}
+            </p>
+            <p>
+                {{ form.engine_pos.label }}<br>
+                {{ form.engine_pos(width=32) }}
+            </p>
+            <p>
+                {{ form.engine_type.label }}<br>
+                {{ form.engine_type(width=32) }}
+            </p>
+            <p>
+                {{ form.hull_type.label }}<br>
+                {{ form.hull_type(width=32) }}
+            </p>
+            <p>
+                {{ form.get_estimate() }}
+            </p>
+        </form>
+    </div>
+    <div stle="flex-grow: 10;">
+        {% if form.estimate %}
+        <p>Asking price: {{ form.estimate }}</p>
+        {% else %}
+        <p style="font-size: 28;">Enter sailboat features to get an estimated asking price.</p>
+        {% endif %}
+        <hr>
+    </div>
+</div>
+{% endblock %}

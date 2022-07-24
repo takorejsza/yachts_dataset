@@ -17,8 +17,8 @@ def remove_outliers(df: pd.DataFrame,
         q1 = df_2[col].quantile(0.25)
         q3 = df_2[col].quantile(0.75)
         iqr = q3-q1
-        lower_limit = q1 - 1.5 * iqr
-        upper_limit = q3 + 1.5 * iqr
+        lower_limit = q1 - multiplier * iqr
+        upper_limit = q3 + multiplier * iqr
 
         is_outlier = lambda x: 1 if (x < lower_limit) | (x > upper_limit) else 0
         df_2['is_outlier'] = df_2[col].map(is_outlier)
