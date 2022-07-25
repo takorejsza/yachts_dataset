@@ -1,5 +1,5 @@
 # yachts_dataset
-# Troubleshoot repo before pushing code to main branch
+# Troubleshoot repo before pushing code to main branch.
 **Scrapes Used Sailboat Listings From https://www.sailboatlistings.com**
 
 Dataset should appear after running `dvc repro`
