@@ -13,7 +13,7 @@ def predict(path, X:pd.DataFrame, y:pd.DataFrame, seed:int=42):
     
     cv = KFold(5, shuffle=True, random_state=seed)
     
-    scores = cross_val_score(model, X, y, cv=cv)
+    scores = cross_val_score(model, X, np.ravel(y.values), cv=cv)
 
     preds = model.predict(X)
     

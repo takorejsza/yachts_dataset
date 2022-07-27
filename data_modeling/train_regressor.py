@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import Ridge
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score, KFold
 import pickle
 import os
@@ -21,11 +21,11 @@ def train_regression_model(
     cv = KFold(5, shuffle=True, random_state=seed)
 
     pipe = Pipeline([
-        ('scaler', StandardScaler()), ('model', Ridge(alpha=5e-6))
+        ('scaler', StandardScaler()), ('model', RandomForestRegressor(n_estimators=800,random_state=seed))
     ])
 
-    pipe.fit(X, y)
-    train_scores = cross_val_score(pipe, X, y, cv=cv)
+    pipe.fit(X, np.ravel(y.values))
+    train_scores = cross_val_score(pipe, X, np.ravel(y.values), cv=cv)
 
     metrics = {
         'CV-R2': round(np.mean(train_scores), 3),
