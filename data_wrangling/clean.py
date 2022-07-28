@@ -19,7 +19,7 @@ def adjust_for_inflation(df:pd.DataFrame) -> pd.DataFrame:
     return df
 
 def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
-    df = pd.read_csv(file, usecols=[i for i in range(1,12)])
+    df = pd.read_csv(file, usecols=[i for i in range(1,15)])
     df.columns = [c.strip().replace(':','') for c in df.columns]
 
     "=======QUANTITATIVE VARIABLES======"
@@ -38,10 +38,8 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     """=======DUMMY / CATEGORICAL VARIABLES======"""
 
-    df['Material'],\
-    df['Hull_Type'] = zip(*df["Hull"].\
-                            map(lambda string: tuple(string.split(u'\xa0'))))
-    df['Is_Mono'] = df['Hull_Type'].map(lambda x: 1 if x == 'monohull' else 0)
+    #df['Material'],df['Hull_Type'] = zip(*df["Hull"].map(lambda string: tuple(string.split(u'\xa0'))))
+    df['Is_Mono'] = df['Hull'].map(lambda x: 1 if x == 'monohull' else 0)
 
     df.drop(columns=["Hull"], inplace=True)
 
@@ -49,8 +47,11 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
     design_func = lambda t: 'racer' if re.search('racer',t) else t
     df["Type"] = df["Type"].map(design_func)
 
-    yacht_classes = ('cruiser','daysailer', 'dingy', 'motorsailer', 'racer')
+    yacht_classes = ('cruiser','daysailer', 'dinghy', 'motorsailer', 'racer')
     df = df[df["Type"].isin(yacht_classes)]
+
+    df['Is_cruiser'] = df['Type'].map(lambda x: 1 if x == 'cruiser' else 0)
+    df['Is_daysailer'] = df['Type'].map(lambda x: 1 if x == 'daysailer' else 0)
 
     """=======CATEGORICAL ENCODING======"""
 
@@ -83,19 +84,34 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 
     df['Engine_Count'] = df['Engine'].map(engine_count)
 
+    df['Is_Fiberglass'] =df['Material'].map((lambda x: 1 if x == 'fiberglass' else 0))
+
+    df['Is_masthead_sloop'] = df['Rigging'].map(lambda x: 1 if x == 'masthead sloop' else 0)
+    df['Is_Cutter'] = df['Rigging'].map(lambda x: 1 if x == 'cutter' else 0)
+    df['Is_Ketch'] = df['Rigging'].map(lambda x: 1 if x == 'ketch' else 0)
+    df.drop(columns=["Rigging"], inplace=True)
+
+    df['Is_Excellent'] = df['Condition'].map(lambda x: 1 if x == 'excellent' else 0)
+    df['Is_Fair'] = df['Condition'].map(lambda x: 1 if x == 'fair' else 0)
+    df['Is_Good'] = df['Condition'].map(lambda x: 1 if x == 'good' else 0)
+    df['Is_Project_boat'] = df['Condition'].map(lambda x: 1 if x == 'project boat' else 0)
+    df.drop(columns=["Condition"], inplace=True)
+
     """=======CORRECT ISSUES CAUSED BY NON-STANDARD NOTATION======"""
     engf = lambda x : 0 if x['Motor_Type'] == 'motorless' else x['Engine_Count']
     df['Engine_Count'] = df.apply(engf, axis=1)
     dslf = lambda x : 0 if x['Motor_Type'] == 'motorless' else x['Is_Diesel']
     df['Is_Diesel'] = df.apply(dslf, axis=1)
     df['Is_Inboard'] = df['Motor_Type'].map(lambda x: 1 if x == 'inboard' else 0)
+
     df.dropna(inplace=True)
     df.drop(columns=["Engine"], inplace=True)
 
     """=======ADJUST FOR INFLATION======"""
     df['Year_Listed'] = pd.to_datetime(df['posted_at']).dt.year
-    # print(type(int(date.today().year)), int(date.today().year))
-    #df['Year'] = df['Year'].astype(int)
+    # Discard boat with unknown manufacture year
+    df = df.drop(index=df[df['Year'] == '19??'].index.values)
+    df['Year'] = df['Year'].astype(int)
     #df = df[(df['Year'] >= 1900)]# & (df['Year'] < int(date.today().year))]
     df = adjust_for_inflation(df)
 
@@ -104,7 +120,7 @@ def clean_transform(file:str, drop_null:bool=True) -> pd.DataFrame:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('input_file',
-                        help='intermediates/raw_listings.csv')
+                        help='intermediates/raw_combined_dataset.csv')
     parser.add_argument('output_file',
                         help='intermediates/listings.csv')
 

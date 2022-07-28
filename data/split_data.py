@@ -21,9 +21,8 @@ if __name__ == "__main__":
     import argparse
     
     FEATURES = [
-        'Length','Year','Beam','Draft','Is_Mono','Is_Diesel',
-        'Engine_Count','Is_Inboard'
-    ]
+        'Length','Year','Beam','Draft','Is_Mono','Is_Diesel','Engine_Count','Cabins','Is_Inboard','Year_Listed','Is_Fiberglass',
+        'Is_cruiser','Is_daysailer','Is_masthead_sloop','Is_Cutter','Is_Ketch','Is_Excellent','Is_Fair','Is_Good','Is_Project_boat']
     parser = argparse.ArgumentParser()
 
     parser.add_argument('f', type=str, help='raw csv file with headers')

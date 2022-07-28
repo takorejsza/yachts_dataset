@@ -9,7 +9,7 @@ import pickle
 import os
 
 def train_regression_model(
-    X: pd.DataFrame, y: str, seed: int=7
+    X: pd.DataFrame, y: str, seed: int=42
 ):
     """
     Trains a linear model to predict the asking price of a 
@@ -21,7 +21,7 @@ def train_regression_model(
     cv = KFold(5, shuffle=True, random_state=seed)
 
     pipe = Pipeline([
-        ('scaler', StandardScaler()), ('model', RandomForestRegressor(n_estimators=800,random_state=seed))
+        ('scaler', StandardScaler()), ('model', RandomForestRegressor(n_estimators=300,random_state=seed))
     ])
 
     pipe.fit(X, np.ravel(y.values))

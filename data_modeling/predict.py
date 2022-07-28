@@ -18,7 +18,7 @@ def predict(path, X:pd.DataFrame, y:pd.DataFrame, seed:int=42):
     preds = model.predict(X)
     
     metrics = {
-        'CV-R2':np.mean(scores),
+        'CV-R2':round(np.mean(scores),3),
         'RMSE':np.sqrt(mean_squared_error(y, preds))
     }
 
