@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score, KFold
 import pickle
 import os
+import joblib
 
 def train_regression_model(
     X: pd.DataFrame, y: str, seed: int=42
@@ -37,8 +38,10 @@ def train_regression_model(
     if not os.path.isdir(r"models/"):
         os.mkdir("models")
     
-    with open(r"models/regression_model.pkl", 'wb') as out:
-        pickle.dump(pipe, out)
+    #with open(r"models/regression_model.pkl", 'wb') as out:
+        #pickle.dump(pipe, out)
+
+    joblib.dump(pipe, 'models/regression_model' + '.compressed', compress=True)
 
 if __name__ == "__main__":
     import argparse

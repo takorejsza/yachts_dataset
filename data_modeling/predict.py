@@ -5,12 +5,16 @@ import json
 import os
 from sklearn.model_selection import cross_val_score, KFold
 from sklearn.metrics import mean_squared_error
+import joblib
 
 def predict(path, X:pd.DataFrame, y:pd.DataFrame, seed:int=42):
 
-    with open(path, 'rb') as f:
-        model = pickle.load(f)
-    
+    #with open(path, 'rb') as f:
+    #    model = pickle.load(f)
+    #with open(path, 'rb') as f:
+    #    model = joblib.load(f)
+    joblib.load(path + '.compressed')
+
     cv = KFold(5, shuffle=True, random_state=seed)
     
     scores = cross_val_score(model, X, np.ravel(y.values), cv=cv)
