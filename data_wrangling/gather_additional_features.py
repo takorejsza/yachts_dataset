@@ -37,7 +37,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('input_file', help='intermediates/saved_hyperlinks.txt')
     parser.add_argument('output_file',help='intermediates/additional_features_dataset.csv')
-    #parser.add_argument('-v', '--verbose', action='store_true', help='display metrics')
     args = parser.parse_args()
 
     with open(args.input_file) as file:
