@@ -3,7 +3,7 @@
 {% block content%}
 <h1>Get Estimate</h1>
 <div cass="container", style="display: flex; height: 100px;">
-    <div syle="width: 50%; background: green;">
+    <div syle="width: 50%; background: green; margin-right: 50px;">
         <form action="" method="post"  novalidate>
             {{ form.hidden_tag() }}
             <p>
@@ -23,9 +23,16 @@
                 {{ form.draft(size=32) }}
             </p>
             <p>
+                {{ form.no_cabins.label }}<br>
+                {{ form.no_cabins(size=32) }}
+            </p>
+            <p>
                 {{ form.no_engines.label }}<br>
                 {{ form.no_engines(size=32) }}
             </p>
+    </div>
+    <div syle="margin: 100px;">
+        <form action="" method="post"  novalidate>
             <p>
                 {{ form.engine_pos.label }}<br>
                 {{ form.engine_pos(width=32) }}
@@ -37,6 +44,18 @@
             <p>
                 {{ form.hull_type.label }}<br>
                 {{ form.hull_type(width=32) }}
+            </p>
+            <p>
+                {{ form.hull_material.label }}<br>
+                {{ form.hull_material(width=32) }}
+            </p>
+            <p>
+                {{ form.rigging.label }}<br>
+                {{ form.rigging(width=32) }}
+            </p>
+            <p>
+                {{ form.condition.label }}<br>
+                {{ form.condition(width=32) }}
             </p>
             <p>
                 {{ form.get_estimate() }}
