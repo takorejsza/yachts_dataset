@@ -6,7 +6,7 @@
 
 **Trains an arima model to forecast mean asking price.**
 
-**Serves a web application using Flask and Azure web app services**
+**Serves a web application using Flask and Azure web app services and Github Ations**
 
 
 ### Prerequisies
