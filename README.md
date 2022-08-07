@@ -9,10 +9,10 @@
 **Serves a web application using Flask and Azure web app services and Github Ations**
 
 
-### Prerequisies
+### Dependencies
 Before running the project, all the dependencies in the requirements.txt have to be installed. 
 
-`conda install -r requirements.txt` 
+`conda install -r requirements.txt` or `pip install -r rquirements.txt`
 
 ### Project Components
 
