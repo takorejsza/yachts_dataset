@@ -32,6 +32,7 @@ Before running the project, all the dependencies in the requirements.txt have to
        * Date Posted
        * Adjusted Asking Price 
    - 'Adjusted Asking Price' is the asking price after applying the consumer price index. This was done to accomodate for inflation.
+   - Outliers in continuous features are removed using 1.5 * the inter-quartile range.
 
 2. Regression Analysis
 
