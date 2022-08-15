@@ -1,9 +1,9 @@
 {% extends "/base.html" %}
 
 {% block content%}
-<h1>Get Estimate</h1>
-<div cass="container", style="display: flex; height: 100px;">
-    <div syle="width: 50%; background: green; margin-right: 50px;">
+<!-- <h1>Get Estimate</h1> -->
+<div class="container", style="display: flex; height: 100px;">
+    <div class="form"> 
         <form action="" method="post"  novalidate>
             {{ form.hidden_tag() }}
             <p>
@@ -31,29 +31,29 @@
                 {{ form.no_engines(size=32) }}
             </p>
     </div>
-    <div syle="margin: 100px;">
+    <div class="dropdowns">
         <form action="" method="post"  novalidate>
             <p>
                 {{ form.engine_pos.label }}<br>
-                {{ form.engine_pos(width=32) }}
+                {{ form.engine_pos(size=1) }}
             </p>
-            <p>
+            <p class="selectorname">
                 {{ form.engine_type.label }}<br>
                 {{ form.engine_type(width=32) }}
             </p>
-            <p>
+            <p class="selectorname">
                 {{ form.hull_type.label }}<br>
                 {{ form.hull_type(width=32) }}
             </p>
-            <p>
+            <p class="selectorname">
                 {{ form.hull_material.label }}<br>
                 {{ form.hull_material(width=32) }}
             </p>
-            <p>
+            <p class="selectorname">
                 {{ form.rigging.label }}<br>
                 {{ form.rigging(width=32) }}
             </p>
-            <p>
+            <p class="selectorname">
                 {{ form.condition.label }}<br>
                 {{ form.condition(width=32) }}
             </p>
@@ -62,14 +62,14 @@
             </p>
         </form>
     </div>
-    <div stle="flex-grow: 10;">
+    <div>
         {% if form.estimate %}
         <p>Asking price: {{ form.estimate }}</p>
         {% else %}
-        <p style="font-size: 28">Enter sailboat features to get an estimated asking price.</p>
+        <p style="font-size: 28" text-align="center">Enter sailboat features for an estimated asking price.</p>
         {% endif %}
         <hr>
-        <img src="../static/forecast.png" alt="forecast", width="1000" height="450">
+        <img src="../static/forecast.png" alt="forecast", width="900" height="350">
         <hr>
     </div>
 </div>

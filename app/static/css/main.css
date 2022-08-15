@@ -1,0 +1,52 @@
+header{
+    background: #09e2ff;
+    opacity: 0.75;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    height: 45px;
+}
+
+h1{
+    font-size: 18pt;
+    padding-bottom: 10px;
+}
+
+p{
+    text-align: center;
+    margin-right: 15px;
+}
+
+.selectorname{
+    padding-top: 3.25px;
+}
+
+body{
+    /* background: #ffffff; */
+    margin: 2.5px;
+
+}
+
+div{
+    text-align: center;
+    background: #ffffff;
+}
+
+.form{
+    padding-top: 50px;
+}
+
+.dropdowns{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+#adSpace {
+    clear: both;
+    float: left;
+  }
+
+img{
+    padding-left: 20px;
+    padding-right: 20px;
+}

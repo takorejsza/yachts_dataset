@@ -12,7 +12,7 @@ def get_listings(links:set):
     for link in tqdm(links):
         response = requests.get(link).text
         soup = BeautifulSoup(response, 'html.parser').find_all("td")
-        counter = 0
+        # counter = 0
         main_dictionary = dict()
         for j, x in enumerate(soup):
             meta = dict()
@@ -27,17 +27,12 @@ def get_listings(links:set):
                 if o.get('class')[0] == 'details':
                     regex = re.compile(r"[0-9]+-[A-Z][a-z]+-[0-9]+")
                     meta['posted_at'] = re.findall(regex, o.text)[0]
-
             if ('Model' not in meta.keys()) | ('Asking: ' not in meta.keys()):
                 continue
-
             main_dictionary[str(j)] = meta
-
-        result = pd.DataFrame.from_dict(main_dictionary, orient='index')\
-                .drop_duplicates()
-
+        result = pd.DataFrame.from_dict(main_dictionary, orient='index').\
+                 drop_duplicates()
         dataframes.append(result)
-
     return pd.concat(dataframes)
 
 if __name__ == "__main__":
