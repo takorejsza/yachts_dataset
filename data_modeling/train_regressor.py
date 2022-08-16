@@ -22,7 +22,7 @@ def train_regression_model(
     cv = KFold(5, shuffle=True, random_state=seed)
 
     pipe = Pipeline([
-        ('scaler', StandardScaler()), ('model', RandomForestRegressor(n_estimators=300,random_state=seed))
+        ('scaler', StandardScaler()), ('model', RandomForestRegressor(n_estimators=700,random_state=seed))
     ])
 
     pipe.fit(X, np.ravel(y.values))
