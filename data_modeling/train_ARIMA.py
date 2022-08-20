@@ -111,6 +111,7 @@ def train_SARIMAX(
     #produce forecasting plot for one year
     plt.figure(figsize=(12, 5), dpi=100)
     plt.plot(df_combined, label='Original Avg Asking')
+    plt.ylabel('Mean Asking Price ($)')
     plt.plot(df_fc, label='Forecasted Avg Asking')
     plt.title('Monthly Average Asking Price')
     plt.legend(loc='upper right', fontsize=8)
