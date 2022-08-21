@@ -35,6 +35,12 @@ Before running the project, all the dependencies in the requirements.txt have to
    - Outliers in continuous features are removed using 1.5 * the inter-quartile range.
 
 2. Regression Analysis
+   - Train Regressor
+     - Uses Pipeline to assemble StandardScaler and RandomForestRegressor together for modeling and fit on the train dataset
+     - regression_model.compressed (compressed by using joblib library due to large file size)
+   - Predict 
+     - Uses the compressed model file and cross_val_score to get evaluation metrics on the test dataset
+     - Evaluation Metrics (5 Fold Cross Validation R2 Score & Root Mean Square Error) 
 
 
 3. Forecasting
