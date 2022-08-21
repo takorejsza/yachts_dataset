@@ -12,7 +12,7 @@
 ### Dependencies
 Before running the project, all the dependencies in the requirements.txt have to be installed. 
 
-`conda install -r requirements.txt` or `pip install -r rquirements.txt`
+`conda install -r requirements.txt` or `pip install -r requirements.txt`
 
 ### Project Components
 
@@ -44,7 +44,9 @@ Before running the project, all the dependencies in the requirements.txt have to
 
 
 3. Forecasting
-
+   - Train SARIMAX
+     - Splits dataset into train and test set, then uses Find_Best_SARIMAX function to find best hyperparameters, and finally train_SARIMAX to train the best model
+     - Outputs image showing original and forecasted average monthly prices 
 
 
 4. Flask application 
