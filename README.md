@@ -37,20 +37,21 @@ Before running the project, all the dependencies in the requirements.txt have to
 2. Regression Analysis
 
 
-2. Forecasting
+3. Forecasting
 
 
 
-3. Flask application 
+4. Flask application 
    - Azure web app services, https://mads-capstone22-teamsailors.azurewebsites.net)
   ![Alt text](webapp_snippet.PNG)
    
 
-5. Data Visualization Jupyter Notebook (contains exploratory data analysis, model selection, hyperparameter tuning)
-    - Data Visualization 
+5. Data Visualization Jupyter Notebook (contains exploratory data analysis, model selection, hyperparameter tuning) 
+    - Data Visualization, https://drive.google.com/file/d/1zZnBVQP3Oe4wbj3-nQt9K_50b6ZHRMKx/view?usp=sharing
       - Variables Correlations.png
       - R2_RMSE.png
       - True Value V.S. Predicted Value.png
+      - Feature Importance.png
 
 The Jupyter Notebook demonstrates that Random Forest Regressor is the best performing model among all the other non-linear regression model, like Lasso,Ridge, SVR, Decision Tree Regressor, and linear regression model.
 ![Alt text](R2_RMSE.png)
